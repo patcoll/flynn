@@ -42,11 +42,11 @@ func main() {
 		log.Fatalln("Unable to connect to controller:", err)
 	}
 
-	appName := os.Args[1]
+	appID := os.Args[1]
 
-	app, err := client.GetApp(appName)
+	app, err := client.GetApp(appID)
 	if err == controller.ErrNotFound {
-		log.Fatalf("Unknown app %q", appName)
+		log.Fatalf("Unknown app %q", appID)
 	} else if err != nil {
 		log.Fatalln("Error retrieving app:", err)
 	}

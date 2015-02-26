@@ -42,7 +42,7 @@ func mapOutput(out []byte, sep, term string) map[string]string {
 
 type remoteApp struct {
 	Cluster *cfg.Cluster
-	Name    string
+	ID      string
 }
 
 func gitRemoteNames() (results []string, err error) {

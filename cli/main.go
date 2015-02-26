@@ -107,7 +107,7 @@ See 'flynn help <command>' for more information on a specific command.
 
 		if ra, err := appFromGitRemote(flagApp); err == nil {
 			clusterConf = ra.Cluster
-			flagApp = ra.Name
+			flagApp = ra.ID
 		}
 	}
 
@@ -267,8 +267,8 @@ func app() (string, error) {
 		return "", errors.New("no app found, run from a repo with a flynn remote or specify one with -a")
 	}
 	clusterConf = ra.Cluster
-	flagApp = ra.Name
-	return ra.Name, nil
+	flagApp = ra.ID
+	return ra.ID, nil
 }
 
 func mustApp() string {

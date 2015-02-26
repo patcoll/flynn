@@ -114,14 +114,14 @@ func runCreate(args *docopt.Args, client *controller.Client) error {
 	// Register git remote
 	if inGitRepo() && remote != "" {
 		exec.Command("git", "remote", "remove", remote).Run()
-		exec.Command("git", "remote", "add", "--", remote, gitURLPre(clusterConf.GitHost)+app.Name+gitURLSuf).Run()
+		exec.Command("git", "remote", "add", "--", remote, gitURLPre(clusterConf.GitHost)+app.ID+gitURLSuf).Run()
 	}
 	log.Printf("Created %s", app.Name)
 	return nil
 }
 
 func runDelete(args *docopt.Args, client *controller.Client) error {
-	appName := mustApp()
+	appID := mustApp()
 	remote := args.String["--remote"]
 
 	if !args.Bool["--yes"] {
@@ -136,7 +136,7 @@ func runDelete(args *docopt.Args, client *controller.Client) error {
 
 	if remote != "" {
 		if remotes, err := gitRemotes(); err == nil {
-			if app, ok := remotes[remote]; ok && app.Name == appName {
+			if app, ok := remotes[remote]; ok && app.ID == appID {
 				exec.Command("git", "remote", "remove", remote).Run()
 			}
 		}
